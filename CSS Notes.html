@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CSS Notes</title>
+</head>
+
+<body>
+    <header>
+        <h1 id="title">CSS Notes</h1>
+        <ul>
+            <li><a href="#reset">Page Reset</a></li>
+            <li><a href="#text">Text</a></li>
+            <li><a href="#selectors">Selectors</a></li>
+            <li><a href="#variables">Custom Variables</a></li>
+            <li><a href="#media-queries">s</a>Media Queries</li>
+            <li><a href="#">s</a></li>
+            <li><a href="#">s</a></li>
+        </ul>
+        <br><br><br><br><br><br><br><br><br>
+    </header>
+
+
+    <!-- RESET -->
+    <div id="reset">
+        <h2>Page Reset</h2>
+        <p>* {<br> Margin: 0;<br>
+            Padding: 0;<br>
+            box-sizing: border-box;<br>}</p>
+    </div><br><br><br><br><br><br><br>
+
+
+
+    <!-- TEXT -->
+
+    <div id="text">
+        <h2>Text</h2>
+        <h3>-Font-</h3>
+        <p>font-size <br>font-weight <br>font-family<br> font-style: (italic, normal)</p>
+        <h3>-Spacing-</h3>
+        <p>letter-spacing<br> word-spacing<br> line-height<br> text-align<br></p>
+        <h3>-Decoration-</h3>
+        <p>text-decoration: none (remove underline)<br>list-style-type: none (remove bullets) </p>
+        <br><br><br><br><br><br><br><br><br>
+    </div>
+
+
+
+    <!-- SELECTORS -->
+
+    <div id="selectors">
+        <h2>Selectors</h2>
+        <h3>-Standard by Specificity-</h3>
+        <p>
+            * = universal
+            <br>
+            :root = HTML standard
+            <br>
+            div = tag
+            <br>
+            div h1 = descendent tag
+            <br>
+            . = class
+            <br>
+            # = id
+            <br>
+        <h3>-Pseudo Selectors-</h3>
+        <p>
+            :hover
+            <br>
+            ::first-line
+            <br>
+            ::first-letter
+        </p>
+        <h3>-Links-</h3>
+        <p>
+            a:link = unvisited
+            <br>
+            a:visited = visited
+            <br>
+            a:active = while clicking
+        </p>
+        <br><br><br><br><br><br><br><br><br><br><br>
+    </div>
+
+
+
+
+    <!-- VARIABLES -->
+
+    <div id="variables">
+        <h2>-Custom Variables-</h2>
+        <p> :root { <br>
+            --primarycolor: #598437; <br>
+            --radius: 15rem; <br>
+            --butthole: Toit;
+            <br>
+            } <br><br>
+            p { <br>
+            color: var(--primarycolor); <br>
+            } <br>
+            .box { <br>
+            color: var(--radius); <br>
+            }
+        </p>
+    </div><br><br><br><br><br><br><br><br><br>
+
+    <!-- MEDIA QUERIES -->
+    <div id="media-queries">
+        <h2>Media Queries</h2>
+        <p>@media screen and (min-width:$$$px) {<br>
+            --.box {<br>
+            ------border: 3px solid black;<br>----}<br>}
+        <p>320px — 480px: Mobile devices<br>
+            481px — 768px: iPads, Tablets<br>
+            769px — 1024px: Small screens, laptops<br>
+            1025px — 1200px: Desktops, large screens<br>
+            1201px and more —  Extra large screens, TV
+        </p>
+    </div>
+
+
+
+
+</body>
+
+</html>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+    <!-- BACKGROUND -->
+
+background-color
+background-image: url("../skldjflskj.png");
+background: (allows color and image together or seperate)
+background: (color or image or whatever, position/size repeat attachment)
+background-repeat: repeat-x, repeat-y, space, round-only (max full images, otherwise stretch)
+background-size: cover, contain
+background-position: center, x% y%
+background-attachment: fixed, scroll
+
+object-fit: cover (sets photo into specified height no distortion)
+opacity -0 to 1
+border
+border-radius
+outline
+outline-offset
+outline-radius?
+box-shadow: (x, y, blur, spread, color) (use online generator)
+
+
+/* COLORS */
+
+colors by name
+colors by hex color: #ff0000;
+
+rgba(red, green, blue, alpha)
+rgba(0-225, 0-225, 0-225, 0-1)
+rgba(0%-100%, 0%-100%, 0%-100%, 0-1)
+
+hsla(hue, saturation, lightness, alpha)
+hsla(0-360, 0%-100%, 0%-100%, 0-1)
+
+Linear-gradient: to bottom / 45deg, red20%, blue50%
+
+/* Fonts */
+
+in the
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Droid%20Serif" rel="stylesheet">
+</head>
+Fallback fonts
+font-family: "Helvetica", "Arial", serif;
+
+--------------
+@font-face {
+font-family: 'Glegoo';
+src: url('../fonts/Glegoo-Regular.ttf') format('truetype');
+}--------------------------
+
+/* display and positioning */
+
+position: absolute(removes element from doc flow, relative to last relative ancestor), relative (relative to
+original
+position), fixed (top: 0 left: 0), sticky (sticks when not on page)
+display: block, inline, inline-block
+
+float: left, right (width must be specified)
+clear: left(this element will clear other elements in its path, no element can pass it to the left), right, both,
+none
+()
+clear on next element, it will be back in flow after
+
+z-index:
+
+transform: translateX(), translateY(), translate(xpx, ypx) scaleX(), scaleY(), scale(1.2,1.5), rotate(xdeg),
+skewX(xdeg), skewY(xdeg),
+skew(xdeg, ydeg)
+
+/* transitions */
+
+transition-property: color, border, border-color, font-size, rotate, right, left, bottom, top font, flex-grow,
+flex-shrink, text-shadow, transform, z-index, width, height, ;
+-------
+transition-duration: 1.5s;
+--------
+transition-timing-function: linear, ease, ease-in, ease-out,ease-in-out;
+-------
+transition-delay: 0.5s;
+
+MULTIPLE PROPERTIES
+transition: color 1s linear 1s,
+font-size 750ms ease-in 100ms;
+
+SHORTHAND
+transition: color 1.5s linear 0.5s;
+
+"all" property
+
+p:hover; {
+specify the new state of the div
+}
+
+animation: animation-(name), animation-duration, animation-iteration-count;
+@keyframes (name)
+animation-fill-mode: forwards; (maintains div post animation )
+
+<!-- css formatting -->
+!important; attribute in css
+cursor: pointer
+
+calc(34%-1rem);
+
+
+/* Box Model */
+/* Flexbox */
+
+Flex-parent----------
+display: flex, inline-flex;
+flex-direction: row, row-reverse, column, column-reverse;
+flex-wrap: nowrap, wrap, wrap-reverse
+justify-content: flex-start, flex-end, center, space-between, space-around, space-evenly
+align-items: stretch, flex-start, flex-end, center, baseline
+align-content (spacing between lines): stretch, center, flex-end, space-around, space-between
+
+Flex-child---------------
+order: default=0, 1, 2, 3, 4......
+align-self: stretch, flex-start, flex-end, center, baseline (same as align-items)
+flex-grow: default=0, 1, 2, 3, 4 (by proportion);
+flex-shrink: default=1 1, 2, 3, 4 (by proportion);
+flex: (grow)(shrink)(flex-basis);
+
+/* Grid */

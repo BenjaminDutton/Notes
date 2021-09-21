@@ -1,0 +1,10 @@
+SHORTCUTS-------------
+
+ctrl-alt-up/down = Move line up/down
+ctrl-left/right = Move by word
+ctrl-D = select instances
+alt-click = multiple cursors
+ctrl-L = select line
+ctrl-enter = new line
+shift-alt-down = duplicate
+ctrl-K ctrl-C = add comment

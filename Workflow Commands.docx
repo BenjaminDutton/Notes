@@ -1,0 +1,49 @@
+GIT / COMMAND LINE
+git config --global user.name "Ben"
+git config --global user.email "benjaminbrockdutton@gmail.com"
+git init                                                                         - initialize repo
+git status                                                                       - status of changed files
+git add -A                                                                       - add all files to staging
+git commit  -m "message to mark this commit"                                     - commit repo
+git checkout -- .                                                                - restore previous commit
+git clone https://github.com/Learn                                               - copy repo from github
+git remote -v                                                                    - show commit destination
+git remote set url https://place to send repo                                    - set url for push
+git push origin master                                                           - push to github
+
+touch "name-of-file"                                                             - create new empty file
+pwd                                                                              - print working directory
+mkdir "Name-of-directory"
+
+
+
+
+
+
+
+
+
+COMMIT WORKFLOW
+(git init / git clone)
+git status
+git add -A
+git commit -m "message"
+(git remote -v)
+(git remote set url https://place to send repo)  
+git push origin master
+
+
+
+
+
+
+
+
+
+NODE / NPM
+node -v                                                                          - check node version
+node test "name of file"                                                         - run file
+
+npm init -y                                                                      - generate JSON
+npm install lodash
+npm install                                                                      - setup via JSON (install packages)
