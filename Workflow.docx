@@ -1,3 +1,9 @@
+VS Code install,
+GIT install,
+NODE install,
+
+
+
 GIT / COMMAND LINE
 git config --global user.name "Ben"
 git config --global user.email "benjaminbrockdutton@gmail.com"
@@ -7,8 +13,9 @@ git add -A                                                                      
 git commit  -m "message to mark this commit"                                     - commit repo
 git checkout -- .                                                                - restore previous commit
 git clone https://github.com/Learn                                               - copy repo from github
+(git remote add origin https://firstRepoLocation.git)                            - connect to github first time
 git remote -v                                                                    - show commit destination
-git remote set url https://place to send repo                                    - set url for push
+git remote set-url https://newRepoLocation.git                                   - set url for push
 git push origin master                                                           - push to github
 
 touch "name-of-file"                                                             - create new empty file
@@ -28,8 +35,9 @@ COMMIT WORKFLOW
 git status
 git add -A
 git commit -m "message"
+(git remote add origin https://firstRepoLocation.git)
 (git remote -v)
-(git remote set url https://place to send repo)  
+(git remote set-url https://newRepoLocation.git)  
 git push origin master
 
 
@@ -45,5 +53,14 @@ node -v                                                                         
 node test "name of file"                                                         - run file
 
 npm init -y                                                                      - generate JSON
-npm install lodash
 npm install                                                                      - setup via JSON (install packages)
+
+npm install lodash
+
+npm install webpack webpack-cli --save-dev                                       -install webpack
+npm install css-loader style-loader --save-dev                                   -install webpack css support
+npm install postcss-loader --save-dev                                            -install webpack SASS support
+npm install postcss-simple-vars postcss-nested auotoprefixer --save-dev          -install webpack postcss plugins
+npm install postcss-import --save-dev                                            -install webpack import file support
+    create webpack.config.js
+
