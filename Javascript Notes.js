@@ -1,8 +1,16 @@
-'use strict'
+/* ENABLE STRICT MODE */
+"use strict";
 
+/* EXAMPLE VALUES */
 const birthYear = 1994;
 const day = "wednesday";
-const benLikes = ['ice cream', 'candy', 'music', 'ATLA', ['dogs', 'cats', 'squirrels']]
+const benLikes = [
+  ["dessert", "ice cream"],
+  ["sweet", "candy"],
+  ["hobby", "music"],
+  ["show", "ATLA"],
+  ["animal", "dogs", "cats", "squirrels"],
+];
 const benDutton = {
   firstName: "Benjamin",
   lastName: "Dutton",
@@ -56,11 +64,11 @@ OPERATORS / CHARACTERS
 // %
 // Remainder operator
 
-// &&
-// And operator
+// Nullish coalescing operator
+// returns right side if left is null or undefined ('' and '0' return true)
 
-// ||
-// Or operator
+// typeof
+// returns type of arg
 
 // +var
 // convert var to number
@@ -69,12 +77,13 @@ OPERATORS / CHARACTERS
 // returns increased value before / after incrementing
 
 // ...
-// Spread / Rest
-// Spread elements out
+// Rest of args
 function logArgs(firstArg, ...remainingArgs) {
-    console.log(firstArg);
-    console.log(remainingArgs);
+  console.log(firstArg);
+  console.log(remainingArgs);
 }
+// Spreading out arrays / sets
+const spreadArr = [...benLikes, ...ordersSet];
 
 /* ------------------------------------------------------------------------------------------------ */
 
@@ -83,13 +92,7 @@ function logArgs(firstArg, ...remainingArgs) {
 
 // ??
 // Nullish Coalescing Operator - returns right side if left side is null or undefined
-// Often paired with ?. optional chaining
-
-/* ------------------------------------------------------------------------------------------------ 
-/*  CHARACTERS */
-
-// \n
-// New Line
+// Often paired with ?. optional chaining (alternative to || that allows for '0' or '')
 
 /* 
 =================================================================
@@ -97,33 +100,91 @@ SELECTORS / EVENT HANDLERS
 =================================================================
 */
 
+/* ------------------------------------------------------------------------------------------------ */
+/*  SELECTORS */
+
 // document.querySelector('');
-const selectIDElement = document.querySelector('#page-structure');
-const selectClassElements = document.querySelectorAll('.section');
-
-// .children;
-// .classList.add('').remove('');
-// .innerHTML;
-// .textContent;
-// .value;
-// .setAttribute('attribute', 'arg')
-// .style.backgroundColor;
-
-// .append();
-// .before();
+const selectIDElement = document.querySelector("#page-structure");
+const selectClassElements = document.querySelectorAll(".section");
+const selectClosestParentElement = selectIDElement.closest(".section");
 
 /* ------------------------------------------------------------------------------------------------ */
 /*  EVENT HANDLERS */
 
 // addEventListener('')
 // function has no return value / does not run automatically so it is not called (no parentheses)
-selectIDElement.addEventListener('click', function () {
-  this.innerHTML = 'New Inner HTML';
-})
-function changeColor () {
+selectIDElement.addEventListener("click", function (e) {
+  e.target.innerHTML = "New Inner HTML";
+});
+
+// addEventListener to multiple
+selectClassElements.forEach((node) =>
+  node.addEventListener("click", changeColor)
+);
+function changeColor() {
   this.style.backgroundColor = "#491745";
 }
-selectClassElements.forEach((node) => node.addEventListener('click', changeColor));
+
+// addEventListener for keyboard events
+document.addEventListener("keyup", (e) => {
+  if (e.code === "Space" || e.key === "d") {
+    document.body.style = "color: white; background-color: #111111";
+  }
+});
+
+/* ------------------------------------------------------------------------------------------------ */
+/* EVENTS / KEY CODES */
+
+// click, mouseup, mousedown
+// resize
+// scroll
+// blur, focus
+
+// keyup, keydown
+// e.code === 'Space', 'Numpad1', 'Numpad2'
+// e.key === 'Escape', 'Enter', 'Tab', 'Control', 'ArrowUp', 'ArrowRight', 'a', 'b', '1', '2'
+
+/* ------------------------------------------------------------------------------------------------ */
+/* OPTIONS */
+
+// .children.length;
+// .classList.add('classNoPeriod').remove('classNoPeriod').toggle('classNoPeriod');
+// .innerHTML = 'Hello There';
+// .textContent = 'Hello There';
+// .value = '12';
+// .setAttribute('attribute', 'arg');
+// .style.backgroundColor = '#837950';
+
+// element.insertAdjacentHTML(position, text);
+// insert HTML at given position ('beforebegin, 'afterbegin', 'beforeend', 'afterend')
+
+// .append();
+// insert node objects or a string after last child of element
+// div.append(...elements);
+// div.append('string');
+
+// .appendChild();
+// insert node after children
+// div.appendChild(singleChild);
+
+// .before();
+// insert nodes before current element
+// div.before(...elements)
+
+// .after();
+// insert nodes after current element
+// div.after(...elements)
+
+// .focus();
+// set cursor on element
+
+// .blur()
+// remove cursor from element
+
+/* ------------------------------------------------------------------------------------------------ */
+/* DEBOUNCE */
+
+// Debounce avoids accidental double slicks with a pause timer
 
 /* 
 =================================================================
@@ -132,25 +193,24 @@ FUNCTIONS
 */
 
 // Arrow Function
-const arrowFunction = birthYear => 2037 - birthYear; 
+const arrowFunction = (birthYear) => 2037 - birthYear;
 const yearsTill2037 = arrowFunction(birthYear);
 
 // Function Declaration
 function functionDeclaration() {
   console.log("This is a function expression");
-};
+}
 
-// Function Expression
+// Function Expression - value is not hoisted
 const functionExpression = function () {
   console.log("This is a function expression");
 };
 
 // (IIFE) Immediately Invoked Function Expression
-(function () {
-  // 1 + 1;
-})()
 // within parentheses and called by parentheses
-// (function(){})()
+(function (n) {
+  1 + 1 + n;
+})(2);
 // (() => {})()
 
 /* 
@@ -159,15 +219,14 @@ FUNCTION METHODS
 =================================================================
 */
 
-// .bind('thisArg')
-// returns new function with this context binded to this arg
+// .bind('thisArg', 'funcArg1', 'funcArg2')
+// returns new function with this context binded to this arg (does not call function), optionally set permanent value to args
 
-// .call('thisArg', 'functionArg1', 'functionArgETC')
+// .call('thisArg', 'funcArg1', 'funcArg2')
 // calls function with given this context, and manual args
 
-// .apply('thisArg', 'arrArg')
+// .apply('thisArg', 'funcArrArg')
 // calls function with given this context, and array arg
-
 
 /* 
 =================================================================
@@ -199,46 +258,7 @@ Student.prototype = Object.create(Person.prototype);
 Student.prototype.constructor = Student;
 
 // Instance
-const jonas = new Student("Jonas", 1991, "homo sapien", 'biology');
-
-/* ------------------------------------------------------------------------------------------------ */
-/* ES6 CLASS */
-
-// Constructor
-class PersonCl {
-  constructor(fullName, birthYear) {
-    this.fullName = fullName;
-    this.birthYear = birthYear;
-  }
-// Instance Methods
-  calcAge() {
-    console.log(2037 - this.birthYear);
-  }
-// Set property with a function
-  set fullName(name) {
-    if (name.includes(" ")) this._fullName = name;
-    else alert(`${name} is not a full name`);
-  }
-// Reference as property with a function
-  get fullName() {
-    return this._fullName;
-  }
-// Not passed down to instances
-  static hey() {
-    console.log("Hey there 👋");
-    console.log(this);
-  }
-}
-
-// Child Class
-class StudentCl extends PersonCl {
-    constructor(fullName, birthYear, course) {
-    super(fullName, birthYear);
-    this.course = course;
-  } 
-}
-// Instance
-const jonasCl = new StudentCl("Jonas Schmetdmann", 1991, "biology");
+const jonas = new Student("Jonas", 1991, "homo sapien", "biology");
 
 /* ------------------------------------------------------------------------------------------------ */
 /* OBJECT.CREATE(); */
@@ -257,8 +277,8 @@ const PersonObject = {
 
 // Child Class
 const StudentObject = Object.create(PersonObject);
-StudentProto.init = function (firstName, birthYear, course) {
-  PersonProto.init.call(this, firstName, birthYear);
+StudentObject.init = function (firstName, birthYear, course) {
+  PersonObject.init.call(this, firstName, birthYear);
   this.course = course;
 };
 
@@ -266,11 +286,58 @@ StudentProto.init = function (firstName, birthYear, course) {
 const jonasObject = Object.create(StudentObject);
 jonasObject.init("Jonas Schmedtmann", 1979);
 
+/* ------------------------------------------------------------------------------------------------ */
+/* ES6 CLASS */
+
+// Constructor
+class PersonCl {
+  // Private fields only accessible from within class
+  #favColor = "blue";
+  #favHobby = "ukulele";
+  // Class init function
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+  // Instance Methods
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+  // Set property with a function
+  set fullName(name) {
+    if (name.includes(" ")) this._fullName = name;
+    else alert(`${name} is not a full name`);
+  }
+  // Reference as property with a function
+  get fullName() {
+    return this._fullName;
+  }
+  // Not passed down to instances
+  static hey() {
+    console.log("Hey there 👋");
+    console.log(this);
+  }
+}
+
+// Child Class
+class StudentCl extends PersonCl {
+  constructor(fullName, birthYear, course) {
+    // call parent constructor
+    super(fullName, birthYear);
+    this.course = course;
+  }
+}
+// Instance
+const jonasCl = new StudentCl("Jonas Schmetdmann", 1991, "biology");
+
 /* 
 =================================================================
 OBJECT METHODS
 =================================================================
 */
+
+/* ------------------------------------------------------------------------------------------------ */
+/* METHODS ON OBJECT */
 
 // Object.entries('')
 // returns key, value pairs of arg
@@ -280,6 +347,23 @@ OBJECT METHODS
 
 // Object.values('')
 // returns values of arg
+
+// Object.freeze('objToFreeze')
+// freezes object and properties so that changes become syntax errors 1 level deep
+
+// Object.fromEntries()
+// create object from array or map
+const lenBikes = Object.fromEntries(benLikes);
+
+// Object.assign('target', ...sources)
+// copy object
+const denButton = Object.assign({}, benDutton);
+
+/* ------------------------------------------------------------------------------------------------ */
+/* SHARED OBJECT METHODS */
+
+// .hasOwnProperty('prop');
+// checks for local properties (does not look up prototype chain)
 
 /* 
 =================================================================
@@ -291,20 +375,26 @@ LOOPS
 let forArr = [];
 for (let i = benLikes.length; i >= 0; i--) {
   if (i === 3) continue;
-  forArr[i] = `Ben Likes ${benLikes[i]}`
+  forArr[i] = `Ben Likes ${benLikes[i]}`;
 }
 
 // For of
 let forOfArr = [];
 for (const [index, like] of benLikes.entries()) {
-  forOfArr.push( index + 1, like);
+  forOfArr.push(index + 1, like);
+}
+
+// For in
+let forInArr = [];
+for (const key in benDutton) {
+  forInArr.push(key + ": " + benDutton[key]);
 }
 
 // While
 const whileArrData = [6, 5, 4, 3, 2, 1];
 let whileArr = [];
 while (whileArrData.length > 0) {
-  whileArr.push(whileArrData.pop())
+  whileArr.push(whileArrData.pop());
 }
 
 // Switch Statement
@@ -327,9 +417,10 @@ switch (day) {
 CONDITIONALS
 =================================================================
 */
+
 let century;
 let rotations = 4;
-const conditional1 = undefined;
+const conditional1 = 0;
 const conditional2 = 3;
 
 /* ------------------------------------------------------------------------------------------------ */
@@ -346,9 +437,11 @@ century >= 21 ? "solar energy" : "fossil fuel";
 
 // Short Circuiting
 const conditional3 = conditional1 || conditional2;
+// === 3
 
 // Nullish Coalescing Operator
-const conditional4 = conditional1 ?? conditional2
+const conditional4 = conditional1 ?? conditional2;
+//  === 0
 
 /* 
 =================================================================
@@ -357,7 +450,11 @@ ARRAY METHODS
 */
 
 // Array Constructor
-const arrayConstructed = new Array('number of elements OR element1', 'element2', 'elementETC')
+const arrayConstructed = new Array(
+  "number of elements OR element1",
+  "element2",
+  "elementETC"
+);
 // constructs array from number of elements (if given a number arg) or from elements
 
 /* NEW ARRAY */
@@ -387,7 +484,7 @@ const arrayConstructed = new Array('number of elements OR element1', 'element2',
 // returns new arr with elements that pass function test
 
 // .reduce(('accumulator', 'value', 'index', 'array') => {function}, initialValue)
-// iterate and reduce array 
+// returns new value by iterating and reducing array
 
 /* ------------------------------------------------------------------------------------------------ */
 /* FIND */
@@ -399,7 +496,7 @@ const arrayConstructed = new Array('number of elements OR element1', 'element2',
 // return first index matching arg condition
 
 // .indexof('searchElement', 'fromIndex');
-// return index of argument from 
+// return index of argument from
 
 /* ------------------------------------------------------------------------------------------------ */
 /* RETURN VALUES */
@@ -490,7 +587,7 @@ STRING METHODS
 // merge string args with string the method is called on
 
 // .join('')
-// join array elements into a new string by character of arg 
+// join array elements into a new string by character of arg
 
 // .repeat('')
 // repeat as many times as the arg
@@ -502,10 +599,10 @@ STRING METHODS
 // make all uppercase
 
 // .replace('toReplace', 'replaceWith');
-// replace a string with another
+// new string: replace a string with another
 
 // .replaceAll('toReplace', 'replaceWith');
-// replace a string with another
+// new string: replace a string with another
 
 /* ------------------------------------------------------------------------------------------------ */
 /* CHANGE SPACING */
@@ -536,9 +633,6 @@ STRING METHODS
 
 /* ------------------------------------------------------------------------------------------------ */
 /* MUTATE STRING */
-
-// .reverse();
-// reverses array elements
 
 // .split('');
 // split string by arg
@@ -727,48 +821,134 @@ TIMERS
 
 /* 
 =================================================================
+REGULAR EXPRESSIONS
+=================================================================
+*/
+
+/* ------------------------------------------------------------------------------------------------ */
+/*  MODIFIERS */
+
+// Regular Expression
+// /term/
+
+// /term/i
+// case insensitive
+
+// /term/g
+// global: all instances of term
+
+// /term\*/
+// escapes to interpret '*' literally
+
+// ^/term/
+// matches term at beginning of expression
+
+// /term/$
+// matchers term at end of expression
+
+// term1|term2
+// matches term1 OR term2
+
+/* ------------------------------------------------------------------------------------------------ */
+/*  CHARACTERS */
+
+// /\n/
+// New Line
+
+// /\s/
+// White Space
+
+// /[a-z]/i
+// Letters
+
+// /[0-9]/
+// Numbers
+
+/* 
+=================================================================
+WINDOW OBJECT
+=================================================================
+*/
+
+// window.history.back
+// loads previous page
+
+// window.location.href
+// returns url of current page
+
+// window.location.assign()
+// loads new document
+
+/* 
+=================================================================
+MODULES
+=================================================================
+*/
+
+// Module
+// <script src="module.js" type="module"></script>
+
+// IMPORT / EXPORT
+// export const VAR = 5;
+// import { VAR } from "module.js"
+// import * from "module.js"
+
+// export default new jsClass();
+// import jsClass from "module.js"
+
+/* 
+=================================================================
+ASYNC FUNCTIONS
+=================================================================
+*/
+
+/* ------------------------------------------------------------------------------------------------ */
+/*  ASYNC / AWAIT */
+
+/* 
+=================================================================
 CONCEPTS
 =================================================================
 */
 
 // Type Coercion
-const typeCoercion = 1 + '1'; // '11'
+const typeCoercion = 1 + "1"; // '11'
 
 // === vs ==
 2 === "2"; //false
 2 == "2"; //true
 
 // Object Notation (dot vs bracket)
-benDutton.firstName === benDutton['firstName'];
+benDutton.firstName === benDutton["firstName"];
 
 // Break / Continue
 // Break ends a loop or switch
 // Continue skips an iteration
 
 // Set Default Arguments
-function defaultArgsFunction (arg1 = 'default1', arg2 = 'default2') {
+function defaultArgsFunction(arg1 = "default1", arg2 = "default2") {
   console.log(`Your arguments are ${arg1} and ${arg2}`);
 }
 
 // Chaining
 // Can chain if previous method returns 'this'
 
-// Getters and Setters
+// _ convention
+// used to indicate that the field should not be accessible from UI
 
+// # private fields
+// only accessible from within a class
 
+// Convert string to binary
+// string.toString(2)
 
+// Convert string to UTF-16
+// string.charCodeAt(indexOfCharacter);
+// 'string'.charCodeAt("2"));
 
-
-
-
-
-
-
-
-
-
-
-
+// Convert UTF-16 to string
+// String.fromCharCode('charCodeToConvert')
+// String.fromCharCode("108");
 
 /* 
 ===================================================================================================================================================================================================
@@ -776,53 +956,95 @@ REVISIT
 ===================================================================================================================================================================================================
 */
 
-// strings / destructuring - coding challenge #4
-// strings / destructuring - coding challenge #2
-// functions returning functions
-// bind, call, apply
-// short circuiting vs nullish coalescing operator
-// bigint
-// .fullName vs ._fullName in a constructor
-// static methods
+// OPERATORS / STRINGS / DESTRUCTURING - CODING CHALLENGES AND ONWARD
 
-// geolocation
-// open street maps
-// leaflet
+/* API */
+// restcountries api
+// geocode.xyz api
 // intersection api
-// What the hell is the dom?
+// leaflet - open street maps
+// local storage
+// localStorage.setItem / get with JSON.parse
+// geolocation
+// spoonacular api
+
+/* CONCEPTS */
 // library vs api
 // dom traversal
-// .toggle
 // architecture - user stories
-// rest parameters create array
-// local storage
-// JSON object
-// location object
+// What the hell is the dom?
+// OOP with classes
+// declarative > functional programming
+// pure vs impure functions with side effects
+// commonjs modules in node.js (used in webpack)
+// recursive functions
+// this
+// getters and setters
+// MVC Architecture (model, view, control) / publisher-subscriber pattern
+// const self = this - to avoid the fact that this in nested functions points to global object for no reason
+// arguments keyword is arraylike structure that lists all arguments
+// IIFE
+// closures - keep scope chain in tact for nested functions
+// first class functions
+// debounce
 
-// constructor challenges
-// 11 and 12
+/* ASYNC */
+// async await with try/catch
+// fetch
+// JSON object
+// promises
+// promise.race, promise.all, promise.allSettled, promise.all, promise.any
+
+// rest parameters create array
+// outdated module pattern (common.js?)
+// jsdocs comments
+// ['a', 'b', 'c'].reduce((a, v) => ({ ...a, [v]: v}), {})
+// bigint
+// JSON.stringify(objectToConvert)
+// JSON.parse(stringToMakeJSON)
+
+/* NEEDS ANOTHER TUTORIAL */
+// destructuring
+// async / await
+
+/* ----------------------------------------------------------------------------------------------- */
 
 // Modal
 // lazy loading
 // tab menu
 // slider
+// mobile menu / sticky
+// leaflet map
+// responsive images
+// section fade in w/ intersection
+// pagination
+// search
+// Json converter
+// debounce
 
 // Pig Game
 // Guess My Number
 // Flappy Bird
+// Arcade Game
+
+// TERMS ------------------------------------------------------------------------------
+// syntax parsers - turn code into computer readable code (with compiler / interpreter)
+// lexical environment / scope / lexical scope - keeps variables in physically in writing
+// execution context - controls what lexical environment is happening currently
+// name / value pair - name can only have 1 value in a given context, value can be more name / value pairs
+// global context creates global object / this keyword pointing to global object
+// global === not inside a function
+// Object literal syntax = creation of object with brackets
+// Currying - creating a copy of a function with preset parameters (using bind)
+// Classical inheritance -  many languages, complex
+// Prototypal inheritance - javascript
+
+// underscore js
+// lodash
+// npm event emitter
 
 /* 
 ===================================================================================================================================================================================================
 CODING CHALLENGES
 ===================================================================================================================================================================================================
 */
-
-console.log(Date());
-console.log(parseInt(''));
-function roughScale(x, base) {
-  const parsed = Number.parseInt(x, base);
-  if (Number.isNaN(parsed)) {
-    return 0;
-  }
-  return parsed * 100;
-}

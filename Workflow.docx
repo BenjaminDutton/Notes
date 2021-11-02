@@ -7,23 +7,41 @@ NODE install,
 GIT / COMMAND LINE
 git config --global user.name "Ben"
 git config --global user.email "benjaminbrockdutton@gmail.com"
-git init                                                                         - initialize repo
-git status                                                                       - status of changed files
-git add -A                                                                       - add all files to staging
-git commit  -m "message to mark this commit"                                     - commit repo
-git checkout -- .                                                                - restore previous commit
-git clone https://github.com/Learn                                               - copy repo from github
-(git remote add origin https://firstRepoLocation.git)                            - connect to github first time
-git remote -v                                                                    - show commit destination
-git remote set-url https://newRepoLocation.git                                   - set url for push
-git push origin master                                                           - push to github
+git init                                                                      - initialize repo
+git status                                                                    - status of changed files
+git add -A                                                                    - add all files to staging
+git commit  -m "message to mark this commit"                                  - commit repo
+git checkout -- .                                                             - restore previous commit
+git clone https://github.com/Learn                                            - copy repo from github
+(git remote add origin https://firstRepoLocation.git)                         - connect to github first time
+git remote -v                                                                 - show commit destination
+git remote set-url https://newRepoLocation.git                                - set url for push
+git push origin master                                                        - push to github
+git branch                                                                    - print git branches
+git reset folder/file.html                                                    - remove file from staging area
+git branch branchName                                                         - create new branch
+git checkout branchName                                                       - switch to git branch
+git merge branchNameToMergeWithCurrent                                        - merge branch with current
+git merge branchNameToMergeWithCurrent --no-ff                                - merge branch with current                                                                         / show merge on github
+git commit -am 'message'                                                      - stage and commit together
+git pull origin master                                                        - pull down copy from github
+git branch -d branchName                                                      - delete branch
+git checkout -b newBranchName                                                 - create / switch to branch
 
-touch "name-of-file"                                                             - create new empty file
-pwd                                                                              - print working directory
+touch name-of-file.js name2.js                                                         - create new empty file
+pwd                                                                           - print working directory
 mkdir "Name-of-directory"
-
-
-
+dir
+up and down for past commands
+del script.js
+ls                  -list files and dirs
+tab autocomplete
+nano edit file
+rm nameOfFile.js                -delete
+mv nameOfFile nameOfDestination
+rmdir nameOfDirectory               - remove directory
+rm -R nameOfDirectory           - remove files and directory
+program -v                    -check version
 
 
 
@@ -49,18 +67,59 @@ git push origin master
 
 
 NODE / NPM
-node -v                                                                          - check node version
-node test "name of file"                                                         - run file
+node -v                                                                       - check node version
+node test "name of file"                                                      - run file
 
-npm init -y                                                                      - generate JSON
-npm install                                                                      - setup via JSON (install packages)
+npm init -y                                                                   - generate JSON w/ presets for first time
+npm install                                                                   - setup via JSON (install packages)
 
-npm install lodash
 
-npm install webpack webpack-cli --save-dev                                       -install webpack
-npm install css-loader style-loader --save-dev                                   -install webpack css support
-npm install postcss-loader --save-dev                                            -install webpack SASS support
-npm install postcss-simple-vars postcss-nested auotoprefixer --save-dev          -install webpack postcss plugins
-npm install postcss-import --save-dev                                            -install webpack import file support
+
+npm install webpack webpack-cli --save-dev                                    -install webpack
+npm install css-loader style-loader --save-dev                                -install webpack css support
+npm install postcss-loader --save-dev                                         -install webpack SASS support
+npm install postcss-simple-vars postcss-nested auotoprefixer --save-dev       -install webpack postcss plugins
+npm install postcss-import --save-dev                                         -install webpack import file support
+npm install webpack-dev-server --save-dev                                     -install webpack server
+npm install postcss-mixins --save-dev                                         -install webpack postcss mixins support
+npm install lazysizes                                                         -install webpack lazyloading
+npm install clean-webpack-plugin --save-dev                                   -install clean dist support
+npm install mini-css-extract-plugin --save-dev                                -install css seperated file support
+npm install css-minimizer-webpack-plugin                                      -mini css?
+npm install html-webpack-plugin                                               -
+npm install fs-extra --save-dev
+npm install @babel/core @babel/preset-env babel-loader --save-dev             -backwards compatibility
+npm install leaflet                                                           -install leaflet
+npm install core-js                     -polyfilling
+npm install regenerator-runtime             -polyfilling async
+npm install fractional                          -convert to franctions
     create webpack.config.js
 
+esc :wq after pull to fix merge conflict 
+
+
+
+npm install package -generate                   -install global across computer
+
+
+PARCEL
+npx parcel entryPoint.html
+npm uninstall packageName
+
+
+
+
+
+check careers pages to make openings
+look for remote post boards
+custom cover letter
+    introduce - 1 paragraph experience and strengths - 1/2 sentences about you in the company
+appear current somehow
+tech vocab, be familiar with everything not learned
+
+have questions for interviewer
+
+interview is a 2 way street
+
+limit complaining
+try not to dodge responsibility
