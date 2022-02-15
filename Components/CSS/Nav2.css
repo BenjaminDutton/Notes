@@ -1,0 +1,237 @@
+// PRIMARY NAV
+.primary-nav {
+  padding-top: 10px;
+
+  @mixin atMedium {
+    padding-top: 0;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    list-style: none;
+    display: inline-block;
+    padding-right: 7px;
+    @mixin atMedium {
+      padding-right: 20px;
+    }
+  }
+
+  li:last-child {
+    padding-right: 0;
+    @mixin atMedium {
+      padding-right: 20px;
+    }
+  }
+
+  a {
+    color: #fff;
+    font-weight: 300;
+    text-decoration: none;
+    display: block;
+    padding: 5px 8px;
+    font-size: 0.8rem;
+    background: rgba(47, 85, 114, 0.55);
+
+    @mixin atMedium {
+      font-size: 1rem;
+      padding: 12px 0;
+      background: transparent;
+
+      &.is-current-link {
+        color: #fabb69;
+      }
+    }
+  }
+}
+
+//   SITE HEADER
+.site-header {
+  padding: 10px 0;
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+  transition: background-color 0.3s ease-out;
+
+  &--is-expanded {
+    background-color: rgba(47, 85, 114, 0.55);
+  }
+
+  @mixin atMedium {
+    position: fixed;
+    background-color: rgba(47, 85, 114, 0.3);
+
+    &--dark {
+      background-color: rgba(23, 51, 72, 0.85);
+    }
+  }
+
+  &__btn-container {
+    @mixin atMedium {
+      order: 2;
+    }
+  }
+
+  &__logo {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: $mainBlue;
+    padding: 25px 36px;
+    transition: all 0.3s ease-out;
+
+    @mixin atMedium {
+      left: auto;
+      transform: translateX(0);
+
+      .site-header--dark & {
+        transform: scale(0.57) translateY(-42%);
+      }
+    }
+  }
+
+  &__menu-icon {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+
+    @mixin atMedium {
+      display: none;
+    }
+
+    &__middle {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 0;
+      width: 20px;
+      height: 3px;
+      background-color: #fff;
+      transition: all 0.3s ease-out;
+      transform-origin: 0 50%;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 3px;
+      background-color: #fff;
+      transform-origin: 0 0;
+      transition: transform 0.3s ease-out;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 20px;
+      height: 3px;
+      background-color: #fff;
+      transform-origin: 0 100%;
+      transition: transform 0.3s ease-out;
+    }
+  }
+
+  &__menu-icon--close-x {
+    &::before {
+      transform: rotate(45deg) scaleX(1.25);
+    }
+
+    .site-header__menu-icon__middle {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    &::after {
+      transform: rotate(-45deg) scaleX(1.25);
+    }
+  }
+
+  &__menu-content {
+    opacity: 0;
+    transform: scale(1.1);
+    transition: all 0.3s ease-out;
+    position: relative;
+    z-index: -10;
+    text-align: center;
+    padding-top: 90px;
+
+    @mixin atMedium {
+      display: flex;
+      justify-content: flex-end;
+      opacity: 1;
+      z-index: 1;
+      padding-top: 0;
+      transform: scale(1);
+    }
+
+    &--is-visible {
+      opacity: 1;
+      z-index: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+// WRAPPER
+
+.wrapper {
+  overflow: hidden;
+  padding-left: 18px;
+  padding-right: 18px;
+  max-width: 1236px;
+  margin-left: auto;
+  margin-right: auto;
+
+  &--medium {
+    max-width: 976px;
+  }
+
+  &--narrow {
+    max-width: 470px;
+  }
+
+  &--no-padding-until-medium {
+    padding-left: 0;
+    padding-right: 0;
+
+    @mixin atMedium {
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+  }
+
+  &--no-padding-until-large {
+    padding-left: 0;
+    padding-right: 0;
+
+    @mixin atLarge {
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+  }
+
+  .wrapper {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  &--b-margin {
+    margin-bottom: 1rem;
+
+    @mixin atSmall {
+      margin-bottom: 3.875rem;
+    }
+  }
+}

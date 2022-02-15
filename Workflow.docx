@@ -1,125 +1,127 @@
-VS Code install,
-GIT install,
-NODE install,
+1) TECH
+2) COMMAND LINE
+3) GIT
+4) NPM
+5) PARCEL
+6) JOB ADVICE
 
 
 
-GIT / COMMAND LINE
-git config --global user.name "Ben"
-git config --global user.email "benjaminbrockdutton@gmail.com"
-git init                                                                      - initialize repo
-git status                                                                    - status of changed files
+
+- TECH --------------------------------------------------------------
+
+VS Code,
+GIT,
+NODE,
+GIT
+
+
+
+- COMMAND LINE --------------------------------------------------------------
+touch fileName1.js fileName2.js                                               - create new empty file
+nano nameOfFile.txt                                                           - edit file
+rm / dir nameOfFile.js                                                        - remove file
+rmdir nameOfDirectory                                                         - remove directory
+rm -R nameOfDirectory                                                         - remove directory and files
+
+mkdir "Name-of-directory"                                                     - make new directory
+mv nameOfFile nameOfDestination                                               - move a file
+programName -v                                                                - check version
+pwd                                                                           - print working directory
+ls / dir                                                                      - list files and dirs
+
+up key / down key                                                             - view past commands
+tab                                                                           - autocomplete
+
+
+
+- GIT --------------------------------------------------------------
+
+- CONFIG -
+git config --global user.name "Ben"                                           - configure developer name
+git config --global user.email "benjaminbrockdutton@gmail.com"                - configure developer email
+
+- WORKFLOW -
+(git init / git clone https://github.com/repoName)                            - initialize repo / clone repo
+git branch                                                                    - print git branches
+git branch newBranchName                                                      - create new branch
+git checkout -b newBranchName                                                 - create / switch to branch
+git checkout nameOfBranch                                                     - switch to git branch
+git merge nameOfBranch                                                        - merge branch with current
+git merge branchNameToMergeWithCurrent --no-ff                                - merge branch with current / show merge on github
+(esc :wq after pull to fix merge conflict)
+
+- COMMIT -
+git status                                                                    - show status of changed files
 git add -A                                                                    - add all files to staging
-git commit  -m "message to mark this commit"                                  - commit repo
-git checkout -- .                                                             - restore previous commit
-git clone https://github.com/Learn                                            - copy repo from github
+git commit  -m "message to mark this commit"                                  - commit repo with message
+git commit -am 'message'                                                      - stage and commit together
 (git remote add origin https://firstRepoLocation.git)                         - connect to github first time
 git remote -v                                                                 - show commit destination
-git remote set-url https://newRepoLocation.git                                - set url for push
+(git remote set-url https://newRepoLocation.git)                              - set url for push
 git push origin master                                                        - push to github
-git branch                                                                    - print git branches
-git reset folder/file.html                                                    - remove file from staging area
-git branch branchName                                                         - create new branch
-git checkout branchName                                                       - switch to git branch
-git merge branchNameToMergeWithCurrent                                        - merge branch with current
-git merge branchNameToMergeWithCurrent --no-ff                                - merge branch with current                                                                         / show merge on github
-git commit -am 'message'                                                      - stage and commit together
+
+- RESET -
 git pull origin master                                                        - pull down copy from github
+git reset folder/file.html                                                    - remove file from staging area
+git checkout -- .                                                             - restore previous commit
 git branch -d branchName                                                      - delete branch
-git checkout -b newBranchName                                                 - create / switch to branch
-
-touch name-of-file.js name2.js                                                         - create new empty file
-pwd                                                                           - print working directory
-mkdir "Name-of-directory"
-dir
-up and down for past commands
-del script.js
-ls                  -list files and dirs
-tab autocomplete
-nano edit file
-rm nameOfFile.js                -delete
-mv nameOfFile nameOfDestination
-rmdir nameOfDirectory               - remove directory
-rm -R nameOfDirectory           - remove files and directory
-program -v                    -check version
 
 
 
-
-
-
-COMMIT WORKFLOW
-(git init / git clone)
-git status
-git add -A
-git commit -m "message"
-(git remote add origin https://firstRepoLocation.git)
-(git remote -v)
-(git remote set-url https://newRepoLocation.git)  
-git push origin master
-
-
-
-
-
-
-
-
-
-NODE / NPM
+- NODE / NPM --------------------------------------------------------------
 node -v                                                                       - check node version
-node test "name of file"                                                      - run file
+node test "nameOfFile"                                                        - run file
 
-npm init -y                                                                   - generate JSON w/ presets for first time
-npm install                                                                   - setup via JSON (install packages)
+(npm init -y)                                                                 - generate JSON w/ presets for first time
+(npm install)                                                                 - setup via JSON (install packages)
 
+npm install webpack webpack-cli --save-dev                                    - install webpack
+npm install webpack-dev-server --save-dev                                     - server functionality
+npm install clean-webpack-plugin --save-dev                                   - clean dist folder before production
+npm install html-webpack-plugin                                               - include html files for bundling
+npm install fs-extra --save-dev                                               - adds file system methods
+npm install @babel/core @babel/preset-env babel-loader --save-dev             - backwards compatibility
+npm install core-js                                                           - polyfilling
+npm install regenerator-runtime                                               - polyfilling async
+npm install normalize.css                                                     - normalize css across browsers
 
+npm install css-loader style-loader --save-dev                                - advanced css support
+npm install postcss-loader --save-dev                                         - SASS support
+npm install postcss-simple-vars postcss-nested auotoprefixer --save-dev       - postcss plugins
+npm install postcss-import --save-dev                                         - import file support
+npm install postcss-mixins --save-dev                                         - postcss mixins support
+npm install mini-css-extract-plugin --save-dev                                - css separated modules
+npm install css-minimizer-webpack-plugin                                      - minified css
 
-npm install webpack webpack-cli --save-dev                                    -install webpack
-npm install css-loader style-loader --save-dev                                -install webpack css support
-npm install postcss-loader --save-dev                                         -install webpack SASS support
-npm install postcss-simple-vars postcss-nested auotoprefixer --save-dev       -install webpack postcss plugins
-npm install postcss-import --save-dev                                         -install webpack import file support
-npm install webpack-dev-server --save-dev                                     -install webpack server
-npm install postcss-mixins --save-dev                                         -install webpack postcss mixins support
-npm install lazysizes                                                         -install webpack lazyloading
-npm install clean-webpack-plugin --save-dev                                   -install clean dist support
-npm install mini-css-extract-plugin --save-dev                                -install css seperated file support
-npm install css-minimizer-webpack-plugin                                      -mini css?
-npm install html-webpack-plugin                                               -
-npm install fs-extra --save-dev
-npm install @babel/core @babel/preset-env babel-loader --save-dev             -backwards compatibility
-npm install leaflet                                                           -install leaflet
-npm install core-js                     -polyfilling
-npm install regenerator-runtime             -polyfilling async
-npm install fractional                          -convert to franctions
-    create webpack.config.js
+npm install lazysizes                                                         - lazyloading images
+npm install fractional                                                        - convert to fractions
+npm install leaflet                                                           - leaflet
 
-esc :wq after pull to fix merge conflict 
-
-
-
-npm install package -generate                   -install global across computer
-
-
-PARCEL
-npx parcel entryPoint.html
-npm uninstall packageName
+npm uninstall packageName                                                     - remove npm package
+(npm install package -generate)                                               - install global across computer
 
 
 
+- PARCEL --------------------------------------------------------------
+npx parcel entryPoint.html                                                    - install and launch parcel
 
 
+
+- JOB ADVICE --------------------------------------------------------------
+
+- APPLICATION -
 check careers pages to make openings
 look for remote post boards
 custom cover letter
     introduce - 1 paragraph experience and strengths - 1/2 sentences about you in the company
 appear current somehow
+
+- INTERVIEW -
 tech vocab, be familiar with everything not learned
-
 have questions for interviewer
-
 interview is a 2 way street
 
+- AT JOB -
 limit complaining
 try not to dodge responsibility

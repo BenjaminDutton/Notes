@@ -27,29 +27,34 @@ const question = new Map([
 const ordersSet = new Set(["Item1", "Item3", "Item1", "Item2", "Item2"]);
 
 /* 
-1) OPERATORS / CHARACTERS
-2) SELECTORS / EVENT HANDLERS
+1) OPERATORS
+2) REGULAR EXPRESSION
+3) DOM MANIPULATION
 
-3) FUNCTIONS
-4) FUNCTION METHODS
+4) FUNCTIONS
+5) FUNCTION METHODS
+6) ASYNC FUNCTIONS
 
-5) CONSTRUCTOR FUNCTIONS
-6) OBJECT METHODS
+7) CONSTRUCTOR FUNCTIONS
+8) OBJECT METHODS
 
-7) LOOPS
-8) CONDITIONALS
+9) LOOPS
+10) CONDITIONALS
 
-9) ARRAY METHODS
-10) STRING METHODS
-11) MAP METHODS
-12) SET METHODS
+11) ARRAY METHODS
+12) STRING METHODS
+13) MAP METHODS
+14) SET METHODS
 
-14) MATH OBJECT
-13) NUMBER OBJECT
-15) DATE OBJECT
-16) TIMERS
+15) MATH OBJECT
+16) NUMBER OBJECT
+17) DATE OBJECT
+18) INTL OBJECT
 
-17) CONCEPTS
+19) WINDOW OBJECT
+20) TIMERS
+
+21) CONCEPTS
 */
 
 /* 
@@ -57,6 +62,10 @@ const ordersSet = new Set(["Item1", "Item3", "Item1", "Item2", "Item2"]);
 OPERATORS / CHARACTERS
 =================================================================
 */
+
+// === vs ==
+2 === "2"; //false
+2 == "2"; //true
 
 // !==
 // Strict inequality
@@ -69,6 +78,10 @@ OPERATORS / CHARACTERS
 
 // typeof
 // returns type of arg
+
+// instanceof
+// instanceName instanceof className
+// returns boolean
 
 // +var
 // convert var to number
@@ -93,6 +106,51 @@ const spreadArr = [...benLikes, ...ordersSet];
 // ??
 // Nullish Coalescing Operator - returns right side if left side is null or undefined
 // Often paired with ?. optional chaining (alternative to || that allows for '0' or '')
+
+/* 
+=================================================================
+REGULAR EXPRESSIONS
+=================================================================
+*/
+
+/* ------------------------------------------------------------------------------------------------ */
+/*  MODIFIERS */
+
+// Regular Expression
+// /term/
+
+// /term/i
+// case insensitive
+
+// /term/g
+// global: all instances of term
+
+// /term\*/
+// escapes to interpret '*' literally
+
+// ^/term/
+// matches term at beginning of expression
+
+// /term/$
+// matchers term at end of expression
+
+// term1|term2
+// matches term1 OR term2
+
+/* ------------------------------------------------------------------------------------------------ */
+/*  CHARACTERS */
+
+// /\n/
+// New Line
+
+// /\s/
+// White Space
+
+// /[a-z]/i
+// Letters
+
+// /[0-9]/
+// Numbers
 
 /* 
 =================================================================
@@ -148,7 +206,11 @@ document.addEventListener("keyup", (e) => {
 /* OPTIONS */
 
 // .children.length;
-// .classList.add('classNoPeriod').remove('classNoPeriod').toggle('classNoPeriod');
+// .firstElementChild.color;
+// .lastElementChild.height;
+// .parentElement;
+// .parentNode;
+// .classList.add('classNoPeriod').remove('classNoPeriod').toggle('classNoPeriod').contains('classNoPeriod);
 // .innerHTML = 'Hello There';
 // .textContent = 'Hello There';
 // .value = '12';
@@ -158,14 +220,15 @@ document.addEventListener("keyup", (e) => {
 // element.insertAdjacentHTML(position, text);
 // insert HTML at given position ('beforebegin, 'afterbegin', 'beforeend', 'afterend')
 
+// .prepend();
+// insert node objects or a string before last child of element
+// div.prepend(...elements);
+// div.prepend('string');
+
 // .append();
 // insert node objects or a string after last child of element
 // div.append(...elements);
 // div.append('string');
-
-// .appendChild();
-// insert node after children
-// div.appendChild(singleChild);
 
 // .before();
 // insert nodes before current element
@@ -175,11 +238,27 @@ document.addEventListener("keyup", (e) => {
 // insert nodes after current element
 // div.after(...elements)
 
+// .appendChild();
+// insert node after children
+// div.appendChild(singleChild);
+
+// .remove();
+// remove element
+
+// .removeChild(childName);
+// remove child element
+
 // .focus();
 // set cursor on element
 
 // .blur()
 // remove cursor from element
+
+// .scrollIntoView({ behavior: 'smooth' });
+// scrolls element into view
+
+// .getBoundingClientRect().height.width;
+// return sizes of DOM element
 
 /* ------------------------------------------------------------------------------------------------ */
 /* DEBOUNCE */
@@ -193,7 +272,7 @@ FUNCTIONS
 */
 
 // Arrow Function
-const arrowFunction = (birthYear) => 2037 - birthYear;
+const arrowFunction = (birthYear = 1990) => 2037 - birthYear;
 const yearsTill2037 = arrowFunction(birthYear);
 
 // Function Declaration
@@ -227,6 +306,112 @@ FUNCTION METHODS
 
 // .apply('thisArg', 'funcArrArg')
 // calls function with given this context, and array arg
+
+/* 
+=================================================================
+ASYNC FUNCTIONS
+=================================================================
+*/
+
+/* ------------------------------------------------------------------------------------------------ */
+/* FETCHING PROMISES */
+const fetchFunc = function (param) {
+  return fetch(`https://restcountries.com/v3.1/name/${param}`).then(
+    (response) => {
+      if (!response.ok)
+        throw new Error(`Country not found (${response.status})`);
+
+      return response.json();
+    }
+  );
+};
+
+/* ------------------------------------------------------------------------------------------------ */
+/* BUILDING PROMISES */
+const customPromise = new Promise(function (resolve, reject) {
+  setTimeout(function () {
+    if (Math.random() >= 0.5) {
+      resolve("😀 You Win");
+    } else {
+      reject(new Error("😐 You Lose"));
+    }
+  }, 1000);
+});
+// customPromise
+//   .then((res) => console.log(res))
+//   .catch((err) => console.error(err));
+//   .finally(() => console.log('Finished'));
+
+/* ------------------------------------------------------------------------------------------------ */
+/* AJAX REQUESTS */
+const timeout = function (s) {
+  return new Promise(function (_, reject) {
+    setTimeout(function () {
+      reject(new Error(`Request took too long! Timeout after ${s} second`));
+    }, s * 1000);
+  });
+};
+
+const AJAX = async function (url, uploadData = undefined) {
+  try {
+    const fetchPro = uploadData
+      ? fetch(url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(uploadData),
+        })
+      : fetch(url);
+
+    const res = await Promise.race([fetchPro, timeout(2)]);
+    const data = await res.json();
+
+    if (!res.ok) throw new Error(`${data.message} (${res.status})`);
+    return data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+/* ------------------------------------------------------------------------------------------------ */
+/* ASYNC / AWAIT */
+
+const get3Countries = async function (c1, c2, c3) {
+  try {
+    const data = await Promise.all([
+      AJAX(`https://restcountries.com/v3.1/name/${c1}`),
+      AJAX(`https://restcountries.com/v3.1/name/${c2}`),
+      AJAX(`https://restcountries.com/v3.1/name/${c3}`),
+    ]);
+    console.log(data);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+/* ------------------------------------------------------------------------------------------------ */
+
+// Promise.race([]);
+// returns first fulfilled promise
+
+// Promise.all([]);
+// returns 1 resolved promise only if all are resolved
+
+// Promise.allSettled([]);
+// returns 1 resolved promise even if 1 or more promises are rejected
+
+// Promise.any([]);
+// returns resolved promise as soon as 1 internal promise is resolved
+
+// JSON.stringify(objectToConvert)
+// convert JS object to JSON string
+
+// JSON.parse(stringToMakeJSON)
+// convert JSON string to JS object
+
+// Response.json();
+// convert a promise response to a JS object
 
 /* 
 =================================================================
@@ -365,6 +550,9 @@ const denButton = Object.assign({}, benDutton);
 // .hasOwnProperty('prop');
 // checks for local properties (does not look up prototype chain)
 
+// Object Notation (dot vs bracket)
+benDutton.firstName === benDutton["firstName"];
+
 /* 
 =================================================================
 LOOPS
@@ -412,6 +600,10 @@ switch (day) {
     console.log("Not a valid day!");
 }
 
+// Break / Continue
+// Break ends a loop or switch
+// Continue skips an iteration
+
 /* 
 =================================================================
 CONDITIONALS
@@ -437,10 +629,11 @@ century >= 21 ? "solar energy" : "fossil fuel";
 
 // Short Circuiting
 const conditional3 = conditional1 || conditional2;
+const conditional4 = conditional1 && conditional2;
 // === 3
 
 // Nullish Coalescing Operator
-const conditional4 = conditional1 ?? conditional2;
+const conditional5 = conditional1 ?? conditional2;
 //  === 0
 
 /* 
@@ -486,6 +679,9 @@ const arrayConstructed = new Array(
 // .reduce(('accumulator', 'value', 'index', 'array') => {function}, initialValue)
 // returns new value by iterating and reducing array
 
+// Convert Array to Object
+// ['a', 'b', 'c'].reduce((a, v) => ({ ...a, [v]: v}), {})
+
 /* ------------------------------------------------------------------------------------------------ */
 /* FIND */
 
@@ -517,7 +713,7 @@ const arrayConstructed = new Array(
 /* MANIPULATE */
 
 // .concat(array2, array3, arrayETC);
-// merge array args with array the method is called on
+// returns new array by merging arrays args with array the method is called on
 
 // .toString();
 // returns array as string separated by commas
@@ -564,6 +760,9 @@ const arrayConstructed = new Array(
 
 // .length property
 // returns length
+
+// Chaining
+// Can chain if previous method returns 'this'
 
 /* 
 =================================================================
@@ -642,6 +841,20 @@ STRING METHODS
 
 // .length property
 // returns length
+
+/* ------------------------------------------------------------------------------------------------ */
+/* CONVERT STRING */
+
+// Convert string to binary
+// string.toString(2)
+
+// Convert string to UTF-16
+// string.charCodeAt(indexOfCharacter);
+// 'string'.charCodeAt("2"));
+
+// Convert UTF-16 to string
+// String.fromCharCode('charCodeToConvert')
+// String.fromCharCode("108");
 
 /* 
 =================================================================
@@ -729,7 +942,7 @@ function getRandomNumber(min, max) {
 }
 
 /* ------------------------------------------------------------------------------------------------ */
-/*  ROUNDING */
+/* ROUNDING */
 
 // Math.ceil
 Math.ceil(5.05) === 6;
@@ -741,7 +954,7 @@ Math.floor(5.95) === 5;
 Math.round(5.55) === 6;
 
 /* ------------------------------------------------------------------------------------------------ */
-/*  MIN / MAX */
+/* MIN / MAX */
 
 // Math.min('', '', '')
 Math.min(2, 6, 4) === 2;
@@ -784,7 +997,22 @@ DATE OBJECT
 =================================================================
 */
 
-// Date();
+const today = Date.now();
+
+// let birthday = new Date('December 17, 1995 03:24:00')
+// let birthday = new Date('1995-12-17T03:24:00')
+// let birthday = new Date(1995, 11, 17)            // the month is 0-indexed
+// let birthday = new Date(1995, 11, 17, 3, 24, 0)
+// let birthday = new Date(628021800000)            // passing epoch timestamp
+
+// new Date();
+// returns new date object of current date and time
+
+// Date.parse();
+// parses a date from a string
+
+// Date.toISOString();
+// convert date to ISO format
 
 // Date.prototype.getDate();
 // Date.prototype.getDay();
@@ -802,9 +1030,41 @@ INTL OBJECT
 =================================================================
 */
 
-// Intl.DateTimeFormat();
-// Intl.NumberFormat();
-// Intl.Locale('locales', 'options');
+/* ------------------------------------------------------------------------------------------------ */
+/* DATES */
+
+const newIntlDate = new Intl.DateTimeFormat(
+  /* locales */ [],
+  /* options object */ { dateStyle: "full" }
+).format(today);
+// locales = 'en-GB', 'en-US', [] - empty array to use browser default
+// options = dateStyle: 'full', timeStyle: 'long'
+
+/* ------------------------------------------------------------------------------------------------ */
+/* CURRENCY */
+
+const num = 837383.039;
+
+const intlNum = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  unit: "celsius",
+  currency: "EUR",
+}).format(num);
+
+/* 
+=================================================================
+WINDOW OBJECT
+=================================================================
+*/
+
+// window.history.back();
+// loads previous page
+
+// window.location.href;
+// returns url of current page
+
+// window.location.assign(url)
+// loads new document
 
 /* 
 =================================================================
@@ -815,77 +1075,21 @@ TIMERS
 // setTimeout(() => {}, timeToWait);
 // call function after time in milliseconds
 
-// clearTimeout();
+// clearTimeout(timeoutFunction);
+// cancel a currently running timer
 
-// setInterval();
+// setInterval(() => {}, timeToWait);
+// call a function every interval
 
 /* 
 =================================================================
-REGULAR EXPRESSIONS
+CONCEPTS
 =================================================================
 */
 
 /* ------------------------------------------------------------------------------------------------ */
-/*  MODIFIERS */
+/* MODULES */
 
-// Regular Expression
-// /term/
-
-// /term/i
-// case insensitive
-
-// /term/g
-// global: all instances of term
-
-// /term\*/
-// escapes to interpret '*' literally
-
-// ^/term/
-// matches term at beginning of expression
-
-// /term/$
-// matchers term at end of expression
-
-// term1|term2
-// matches term1 OR term2
-
-/* ------------------------------------------------------------------------------------------------ */
-/*  CHARACTERS */
-
-// /\n/
-// New Line
-
-// /\s/
-// White Space
-
-// /[a-z]/i
-// Letters
-
-// /[0-9]/
-// Numbers
-
-/* 
-=================================================================
-WINDOW OBJECT
-=================================================================
-*/
-
-// window.history.back
-// loads previous page
-
-// window.location.href
-// returns url of current page
-
-// window.location.assign()
-// loads new document
-
-/* 
-=================================================================
-MODULES
-=================================================================
-*/
-
-// Module
 // <script src="module.js" type="module"></script>
 
 // IMPORT / EXPORT
@@ -896,136 +1100,91 @@ MODULES
 // export default new jsClass();
 // import jsClass from "module.js"
 
-/* 
-=================================================================
-ASYNC FUNCTIONS
-=================================================================
-*/
+/* ------------------------------------------------------------------------------------------------ */
+/* JS DOCS */
+
+/**
+ * Description of Function
+ * @param {boolean} [sorted=true] Parameter 1
+ * @param {Object | Object[]} data Parameter "data" of multiple type options
+ * @returns {undefined | string} What does the function return?
+ * @this {Object} Target of "this" keyword
+ * @author Benjamin Dutton
+ * @todo Finish implementation
+ */
 
 /* ------------------------------------------------------------------------------------------------ */
-/*  ASYNC / AWAIT */
+/* NAMING CONVENTIONS */
 
-/* 
-=================================================================
-CONCEPTS
-=================================================================
-*/
-
-// Type Coercion
-const typeCoercion = 1 + "1"; // '11'
-
-// === vs ==
-2 === "2"; //false
-2 == "2"; //true
-
-// Object Notation (dot vs bracket)
-benDutton.firstName === benDutton["firstName"];
-
-// Break / Continue
-// Break ends a loop or switch
-// Continue skips an iteration
-
-// Set Default Arguments
-function defaultArgsFunction(arg1 = "default1", arg2 = "default2") {
-  console.log(`Your arguments are ${arg1} and ${arg2}`);
-}
-
-// Chaining
-// Can chain if previous method returns 'this'
-
-// _ convention
+// protected field
 // used to indicate that the field should not be accessible from UI
 
-// # private fields
-// only accessible from within a class
+// function constructor
+// begin with a capital letter
 
-// Convert string to binary
-// string.toString(2)
+// constants / global config variables
+// UPPERCASE
 
-// Convert string to UTF-16
-// string.charCodeAt(indexOfCharacter);
-// 'string'.charCodeAt("2"));
+/* ------------------------------------------------------------------------------------------------ */
+/* MISC */
 
-// Convert UTF-16 to string
-// String.fromCharCode('charCodeToConvert')
-// String.fromCharCode("108");
+// Type Coercion
+// Javascript coerces numbers to strings
+const typeCoercion = 1 + "1"; // '11'
 
 /* 
-===================================================================================================================================================================================================
-REVISIT
-===================================================================================================================================================================================================
+===================================================================================
+IMPLEMENT
+===================================================================================
 */
 
-// OPERATORS / STRINGS / DESTRUCTURING - CODING CHALLENGES AND ONWARD
-
-/* API */
-// restcountries api
-// geocode.xyz api
-// intersection api
+/* API / LIBRARIES */
+// responsive images
+// leaflet map
 // leaflet - open street maps
+// geocode.xyz api
+// geolocation
+// intersection api
 // local storage
 // localStorage.setItem / get with JSON.parse
-// geolocation
+
+// moment.js
+// restcountries api
 // spoonacular api
-
-/* CONCEPTS */
-// library vs api
-// dom traversal
-// architecture - user stories
-// What the hell is the dom?
-// OOP with classes
-// declarative > functional programming
-// pure vs impure functions with side effects
-// commonjs modules in node.js (used in webpack)
-// recursive functions
-// this
-// getters and setters
-// MVC Architecture (model, view, control) / publisher-subscriber pattern
-// const self = this - to avoid the fact that this in nested functions points to global object for no reason
-// arguments keyword is arraylike structure that lists all arguments
-// IIFE
-// closures - keep scope chain in tact for nested functions
-// first class functions
-// debounce
-
-/* ASYNC */
-// async await with try/catch
-// fetch
-// JSON object
-// promises
-// promise.race, promise.all, promise.allSettled, promise.all, promise.any
-
-// rest parameters create array
-// outdated module pattern (common.js?)
-// jsdocs comments
-// ['a', 'b', 'c'].reduce((a, v) => ({ ...a, [v]: v}), {})
-// bigint
-// JSON.stringify(objectToConvert)
-// JSON.parse(stringToMakeJSON)
-
-/* NEEDS ANOTHER TUTORIAL */
-// destructuring
-// async / await
-
-/* ----------------------------------------------------------------------------------------------- */
-
-// Modal
-// lazy loading
-// tab menu
-// slider
-// mobile menu / sticky
-// leaflet map
-// responsive images
-// section fade in w/ intersection
-// pagination
 // search
-// Json converter
+// pagination
+// smilga mini projects
 // debounce
+// render error
 
 // Pig Game
 // Guess My Number
 // Flappy Bird
 // Arcade Game
+
+/* 
+===================================================================================
+LEARN
+===================================================================================
+*/
+
+/* CONCEPTS */
+// commonjs modules in node.js (used in webpack)
+// recursive functions
+// getters and setters
+// MVC Architecture (model, view, control) / publisher-subscriber pattern
+// const self = this - to avoid the fact that this in nested functions points to global object for no reason
+// arguments keyword is arraylike structure that lists all arguments
+// closures - keep scope chain in tact for nested functions
+
+/* NEEDS ANOTHER TUTORIAL */
+// destructuring
+// async / await
+// function reference vs call?
+// create a promise
+// debounce
+// bigint
+// working with dates
 
 // TERMS ------------------------------------------------------------------------------
 // syntax parsers - turn code into computer readable code (with compiler / interpreter)
@@ -1038,13 +1197,80 @@ REVISIT
 // Currying - creating a copy of a function with preset parameters (using bind)
 // Classical inheritance -  many languages, complex
 // Prototypal inheritance - javascript
+// Thennable - can be returned by a .then() method
+// declarative > functional programming
+// pure vs impure functions with side effects
+// runtime
+// xml
+// IDE
+// jsx
+// programmatically
+// controlled component
+// stateful = smart vs stateless vs dumb
 
+// library vs api vs framework
+// dom traversal
+// architecture - user stories
+// What the hell is the dom?
+// what is OOP with classes
+// first class functions
+
+// TECH ------------------------------------------------------------------------------
 // underscore js
 // lodash
 // npm event emitter
+// outdated module pattern (common.js?)
+// typescript === javascript with var types?
 
-/* 
-===================================================================================================================================================================================================
-CODING CHALLENGES
-===================================================================================================================================================================================================
-*/
+// SEO ------------------------------------------------------------------------------
+// backlinks - other websites linking to your page
+// search intent - reason behind the search
+// - content type - blogs, videos, products, tools
+// - content format
+// - content angle - product is: (new, comfortable, durable, cheap)
+// depth - full completion of searchers query
+
+// keyword research - find the words people are actually searching
+// search volume - # searches of a given keyword
+// traffic potential - searches of given keyword and related keywords, likely higher than the traffic volume (find by comparing with other pages)
+// Business potential - economic value of a keyword
+// ranking difficulty - how hard will it be to rank for the keyword?
+// modifier words - best, top, cheap
+// look at competitors keywords
+
+// Do top competitors match search intent?
+// Can you compete with the backlinks?
+// Equally or more topically specific/relevant/authoritative?
+
+// ON PAGE SEO -------------------------------------------------------------
+// Satisfy search intent ---
+// Don't stuff exact match keyword or stuffing every keyword
+// compare kayword gap common among top results
+// examine relevant top result similarities
+// include keyword in titles when possible
+// target keyword in slug when possible
+// keyword in meta description
+// internal page links whenever possible
+// optimize images for google image search (file names, keyword in alt text, compress images)
+// open graph meta tags
+// <meta property="og:type" content="article" />
+// <meta property="og:locale" content="en_GB" />
+
+// BACKLINKS (link building) -------------------------------------------------
+// create/buy/earn
+// create = directories, social media profile links, blog posts
+// buy = is expensive and can get you banned
+// earn = email outreach, become a source for a publisher, earn a link from a visitor on their site
+// good links are from websites with relevant content, authority (high SEO)
+// on anchor tag: rel="nofollow"(no SEO) rel="ugc"(user-generated content) rel="sponsored" - these are relevant at googles discretion, no rel = follow(good for seo)
+// good links are featured prominently
+
+// avoid noindex meta tag
+// robots.txt file includes a disallow function for site crawlers
+// yoast to generate sitemap and submit it to google search console
+// <link rel="canonical" href="https://preferredDomainOfDuplicates">
+// page load speed
+
+// cache website content through hostinger
+// compress images
+// remove orphan pages
